@@ -1,0 +1,81 @@
+Erstellung der SQL Tabellen für die XML Files
+------------------------------------------------
+
+
+Create TABLE File
+(
+  version varchar (10),
+  encoding Varchar (10),
+  namespace Varchar (50),
+  header_config_name Varchar (50),
+  header_config_activesince date,
+  header_timestamp Date,
+  header_vin Varchar (50),
+  header_internalidentification Varchar (50),
+  header_odometer_unit Varchar (10),
+  header_odometer_value integer,
+  File_ID Integer NOT NULL,
+  Primary Key (File_ID)
+);
+
+
+
+Create TABLE Methode
+(
+  typ varchar (10),
+  name Varchar (50),
+  uid Varchar (50),
+  unit Varchar (50),
+  start_odometer_unit VARChar (10),
+  start_odometer_value Integer,
+  Methode_ID Integer NOT NULL,
+  File_ID INTEGER NOT NULL,
+  Primary Key (Methode_ID),
+  FOREIGN KEY (File_ID) REFERENCES File(Filde_ID)
+);
+
+
+
+Create TABLE Scalar
+(
+  startconfig varchar (10),
+  odometer_activity_unit VARChar (10),
+  odometer_activity_value Integer,
+  value Integer,
+  Methode_ID Integer NOT NULL,
+  FOREIGN KEY (Methode_ID) REFERENCES Methode(Methode_ID)
+);
+
+
+
+Create TABLE List
+(
+  odometer_activity_unit VARChar (10),
+  odometer_activity_value Integer,
+  List_ID Integer NOT NULL,
+  Methode_ID Integer NOT NULL,
+  Primary Key (List_ID),
+  FOREIGN KEY (Methode_ID) REFERENCES Methode(Methode_ID)
+);
+
+
+
+Create TABLE Array
+(
+  Array_ID Integer NOT NULL,
+  Methode_ID Integer NOT NULL,
+  Primary Key (Array_ID),
+  FOREIGN KEY (Methode_ID) REFERENCES Methode(Methode_ID)
+);
+
+
+
+Create TABLE Listvalues
+(
+  value_possition Integer,
+  value Integer,
+  Array_ID Integer NOT NULL,
+  List_ID Integer NOT NULL,
+  FOREIGN Key (Array_ID) REFERENCES Array(Array_ID),
+  FOREIGN KEY (List_ID) REFERENCES List(List_ID)
+);
