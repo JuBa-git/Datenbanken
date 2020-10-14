@@ -1,5 +1,4 @@
-# Datenbanken
-Hausaufgaben Datenbanken
+# Hausaufgaben Datenbanken von:
 <br />Benjamin Ader
 <br />Julian Banzhaf
 <br />Emmelie Beitlich
